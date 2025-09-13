@@ -13,7 +13,7 @@ async function createFood(req, res) {
       name: req.body.name,
       description: req.body.description,
       video: fileUploadResult.url,
-      foodPartner: req.foodPartner._id
+      foodPartnerId: req.foodPartner._id
     });
 
     // Send single response

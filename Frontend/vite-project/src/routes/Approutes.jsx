@@ -5,6 +5,8 @@ import UserRegister from "../htmls/UserRegister";
 import UserLogin from "../htmls/UserLogin";
 import PartnerRegister from "../htmls/PartnerRegister";  // ✅ correct name
 import PartnerLogin from "../htmls/PartnerLogin";        // ✅ correct name
+import Home from "../htmls/Home";
+import CreateFood from "../htmls/CreateFood";
 
 function AppRoutes() {
   return (
@@ -14,6 +16,8 @@ function AppRoutes() {
         <Route path="/user/login" element={<UserLogin />} />
         <Route path="/partner/register" element={<PartnerRegister />} />
         <Route path="/partner/login" element={<PartnerLogin />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/create-food" element={<CreateFood/>} />
       </Routes>
     </Router>
   );

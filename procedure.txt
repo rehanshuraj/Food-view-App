@@ -43,3 +43,18 @@
 -use UUID Generator for make strong unique id (dont go to website directly instead install it locally npm i uuid)
 
 35.now we have a enough api's so let's create frontend from reat ,redux
+36. so in frontend we have to create 4 routes for the users
+- /user/register => user register form
+- /user/login => user login form
+
+- /food-partner/register => food-partner register form 
+- /food-partner/login => food-partner login form
+
+37.use gpt for making ui
+38.use -npm i axios for api integration (linking frontend to api)
+39.To add new features
+-you have to  modify the schemas , and the jsx logic that is above the return function in a particular function
+-also modify the router/apis basically controller auth.controller
+40.when two different api's or website hits each others then we have CORS error
+41.so to fix this cors error we have to install -npm i cors in backend and require and use it in app.js
+42.import navigate for redirecting one page to another page

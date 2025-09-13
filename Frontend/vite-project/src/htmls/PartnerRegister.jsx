@@ -1,9 +1,38 @@
 import React from "react";
-import "../style.css"; // same CSS from before
+import "../style.css"; // keep your CSS
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PartnerRegister = () => {
-  
-  //here we write a function to handl form submission
+  const navigate = useNavigate(); // outside component
+
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Partner form submitted ✅");
+    
+    const name = e.target.name.value;
+    const contactName = e.target.name.value;
+    const phone = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const address = e.target.address.value;
+    
+    const response = await axios.post("http://localhost:3000/api/auth/partner/register",{
+      name,
+      contactName,
+      phone,
+      email,
+      password,
+      address
+    },{
+      withCredentials:true
+    })
+     
+    navigate("/create-food")
+
+
+  };
 
   return (
     <div className="container">
@@ -17,18 +46,18 @@ const PartnerRegister = () => {
         </a>
       </div>
 
-      <form classsName="auth-form" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Business Name" required />
+      {/* FIXED className */}
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <input type="text" name="name" placeholder="Business Name" required />
 
         <div className="input-group">
-          <input type="text" placeholder="Contact Name" required />
-          <input type="tel" placeholder="Phone" required />
+          <input type="text" name="contactname" placeholder="Contact Name" required />
+          <input type="tel" name="phone" placeholder="Phone" required />
         </div>
 
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-
-        <input type="text" placeholder="Address" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <input type="text" name="address" placeholder="Address" required />
         <small>Full address helps customers find you faster.</small>
 
         <button type="submit">Create Partner Account</button>
