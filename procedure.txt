@@ -1,0 +1,45 @@
+1.two folder bnayenge -backend and -frontend
+2.backend ke andr express install krenge 
+3.now make -src folder on backend and in folder src make -app.js file
+4.make server.js file in backend folder (or you can root folder)
+
+       USES EXPLANATION:
+    -APP.JS and -SERVER.JS
+    1.in app.js file we create server and in server.js we start server 
+
+5.In backend folder using terminal(make sure u r in backend folder) install mongoose (npm i mongoose)
+6.now for connecting server to database we make -db folder inside the src folder
+7.make file in -db.js in -db folder
+8.in -db.js we write a code logic of how to connect database
+9.but hum isko start -server.js file me hi krenge(because we want ki humara server connect ho database se isiliye hum server wale file me se hi start krenge) 
+10.now making authentication route for users 
+11.make folder -routes folder in -src folder and create file -auth.routes.js in -routes folder
+12.write only router (or create routers or create api-like './register')
+13.for callbacks(controllers) or api's ke andr ka jo logic hoga uske liye we make another folder called -controllers in -src folder
+14.in -controllers folder we create file -auth.controller.js
+15.in -auth.controller.js we write api's ke andr ka logic
+16.we know we have to make models for users so,for this we create folder -models in -src folder
+17.make -user.model.js file for user model in -models folder
+18.in user.model.js we make userSchema for user
+19.to bcrypt the password or hashing password install -- npm install bcrypt
+20.install npm i jsonwebtoken cookie-parser
+21.use cookie-parser as middlewares in app.js
+22.use jwt secret key generator
+23.we make another .env file in -backend folder to store jwt secrets   
+24.but their is a problem the code u written (process.env.JWT_SECRET) gives undefined so for this u have to install -dotenv pkg in backend and require in server.js file
+25.to do not push this jwt secrets we store this file in .gitignore so make a .gitignore file  in -backend folder
+26.now make another model -foodpartner.nodel.js in -models folder
+27.now make file -food.model.js in folder -models to add food items in it 
+
+28.REMARK: only food partner is avail to add food items in your so to protect it use middlewares
+29.so ,make -middlewares folder in -src folder
+30.create -food.controller.js file in -controller folder for writing api's logic of food
+31.vedio files or files express cannot read so for this we install pkg called npm i multer and require in food routes
+32.use imagekit (cloud) for vedio file storation for this in .env file make variables -IMAGEKIT_PUBLIC_KEY , -IMAGEKIT_PRIVATE_KEY , -IMAGEKIT_URL_ENDPOINT
+33. IN DEVELOPER OPTION OF IMAGEKIT YOU FIND public key and url-endpoint
+34.go the page -imagekit documentation and do the following steps 
+-installation 
+-inisialisation (make -services folder in -src folder & inside a services folder create -storage.service.js file and paste inisialisation code into it)
+-use UUID Generator for make strong unique id (dont go to website directly instead install it locally npm i uuid)
+
+35.now we have a enough api's so let's create frontend from reat ,redux
