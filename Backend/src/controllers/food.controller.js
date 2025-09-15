@@ -1,28 +1,27 @@
 const foodModel = require("../models/food.model");
-const storageService = require('../services/storage.service');
-const { v4: uuid } = require('uuid');
 
 // Controller to create food item
 async function createFood(req, res) {
   try {
-    // Upload file
-    const fileUploadResult = await storageService.uploadFile(req.file.buffer, uuid());
+    if (!req.file) {
+      return res.status(400).json({ error: "No video file uploaded" });
+    }
+  
 
-    // Create food item in DB
+    // Save food item in DB
     const foodItem = await foodModel.create({
       name: req.body.name,
       description: req.body.description,
-      video: fileUploadResult.url,
-      foodPartnerId: req.foodPartner._id
+      video: req.file.path, // multer diskStorage gives .path
+      foodPartnerId: req.body.foodPartnerId // pass in request for now
     });
 
-    // Send single response
     res.status(201).json({
       message: "Food item created successfully",
       food: foodItem
     });
 
-    console.log("Request body:", req.body);
+    console.log("Food created:", foodItem);
   } catch (error) {
     console.error("Error creating food item:", error);
     res.status(500).json({ error: error.message });

@@ -10,7 +10,7 @@ const upload = multer({
 
 //food routes API's
 // POST - /api/food/ [PROTECTED ROUTE - FOOD PARTNER]
-router.post('/', authMiddleware.authFoodPartnerMiddleware,upload.single("vedio"),foodController.createFood)
+router.post('/', authMiddleware.authFoodPartnerMiddleware,upload.single("video"),foodController.createFood)
 
 //api  to give user food items so that user can see food items while scrolling
 // GET - /api/food/ [PUBLIC ROUTE]
