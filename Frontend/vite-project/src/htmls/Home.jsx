@@ -20,7 +20,7 @@ const videos = [
 
 export default function Home() {
   return (
-    <div className="h-screen w-full snap-y snap-mandatory overflow-scroll">
+    <div className="h-screen w-full snap-y snap-mandatory overflow-y-scroll bg-black">
       {videos.map((video) => (
         <div
           key={video.id}
@@ -29,21 +29,21 @@ export default function Home() {
           {/* Background Video */}
           <video
             src={video.src}
-            className="h-full w-full object-cover"
+            className="absolute top-0 left-0 h-full w-full object-cover"
             autoPlay
             loop
             muted
           />
 
-          {/* Overlay (Gradient for readability) */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex flex-col gap-2">
-            {/* Description (2-line truncate) */}
-            <p className="text-white text-sm line-clamp-2">
+          {/* Overlay Content */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-5">
+            {/* Description (2-line clamp) */}
+            <p className="text-white text-base font-medium line-clamp-2 mb-3">
               {video.description}
             </p>
 
             {/* Visit Store Button */}
-            <button className="w-fit px-6 py-2 bg-red-500 text-white text-sm font-semibold rounded-full shadow-md hover:bg-red-600 transition">
+            <button className="px-6 py-2 bg-red-500 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-red-600 transition">
               Visit Store
             </button>
           </div>
@@ -52,4 +52,3 @@ export default function Home() {
     </div>
   );
 }
-

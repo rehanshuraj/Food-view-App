@@ -1,55 +1,67 @@
-const foodpartnerModel = require('../models/foodpartner.model'); //to register food partner
-const jwt = require('jsonwebtoken'); //to create token so that food partner can login
-const userModel = require('../models/user.model'); //to register user
+const foodPartnerModel = require("../models/foodpartner.model")
+const userModel = require("../models/user.model")
+const jwt = require("jsonwebtoken");
 
 
+async function authFoodPartnerMiddleware(req, res, next) {
 
-//middleware to protect food partner routes like add food item etc
-async function authFoodPartnerMiddleware(req,res,next){
-    const token = req.cookies.token; //token is stored in cookie so we get it from cookie
-    if(!token){
+    const token = req.cookies.token;
+
+    if (!token) {
         return res.status(401).json({
-            message: "please login first to access this resource"
+            message: "Please login first"
         })
     }
 
-    try{
-        const decoded = jwt.verify(token,process.env.JWT_SECRET); //to verify token is valid or not, it will give decoded id means it store id in decoded variable
-        const foodPartner = await foodpartnerModel.findById(decoded.id); //to get food partner details from token id
-        res.foodPartner = foodPartner; //we store food partner details in res object so that we can use it in next function
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        next(); //to go to next function
-    }catch(err){
+        const foodPartner = await foodPartnerModel.findById(decoded.id);
+
+        req.foodPartner = foodPartner
+
+        next()
+
+    } catch (err) {
+
         return res.status(401).json({
-            message: "Invalid token, please login again"
+            message: "Invalid token"
         })
+
     }
+
 }
 
-//middleware to protect user routes like view food item etc
-async function authUserMiddleware(req,res,next){
-    const token = req.cookies.token; //token is stored in cookie so we get it from cookie
-    if(!token){
+async function authUserMiddleware(req, res, next) {
+
+    const token = req.cookies.token || req.headers["authorization"]?.split(" ")[1];
+
+    if (!token) {
         return res.status(401).json({
-            message: "please login first to access this resource"
+            message: "Please login first"
         })
     }
-    try{
-        const decoded = jwt.verify(token,process.env.JWT_SECRET); //to verify token is valid or not, it will give decoded id means it store id in decoded variable
-        const user = await userModel.findById(decoded.id); //to get user details from token id
-        res.user = user; //we store user details in res object so that we can use it in next function   
-        next(); //to go to next function
-    }
-    catch(err){
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+        const user = await userModel.findById(decoded.id);
+
+        req.user = user
+
+        next()
+
+    } catch (err) {
+
         return res.status(401).json({
-            message: "Invalid token, please login again"
+            message: "Invalid token"
         })
+
     }
+
 }
-
-
 
 module.exports = {
     authFoodPartnerMiddleware,
     authUserMiddleware
-};
+}

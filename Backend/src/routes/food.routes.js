@@ -1,21 +1,44 @@
-const  express = require('express');
-const router = express.Router();
+const express = require('express');
+const foodController = require("../controllers/food.controller")
 const authMiddleware = require("../middlewares/auth.middleware")
-const foodController = require("../controllers/food.controller")    
+const router = express.Router();
 const multer = require('multer');
 
-const upload = multer({ 
+
+const upload = multer({
     storage: multer.memoryStorage(),
-});
+})
 
-//food routes API's
-// POST - /api/food/ [PROTECTED ROUTE - FOOD PARTNER]
-router.post('/', authMiddleware.authFoodPartnerMiddleware,upload.single("video"),foodController.createFood)
 
-//api  to give user food items so that user can see food items while scrolling
-// GET - /api/food/ [PUBLIC ROUTE]
-router.get('/',
-    authMiddleware.authUserMiddleware,
+/* POST /api/food/ [protected]*/
+router.post('/',
+   // authMiddleware.authFoodPartnerMiddleware,
+    upload.single("video"),
+    foodController.createFood)
+
+
+/* GET /api/food/ [protected] */
+router.get("/",
+   // authMiddleware.authUserMiddleware,
     foodController.getFoodItems)
 
-module.exports = router;
+
+router.post('/like',
+    authMiddleware.authUserMiddleware,
+    foodController.likeFood)
+
+
+router.post('/save',
+    authMiddleware.authUserMiddleware,
+    foodController.saveFood
+)
+
+
+router.get('/save',
+    authMiddleware.authUserMiddleware,
+    foodController.getSaveFood
+)
+
+
+
+module.exports = router

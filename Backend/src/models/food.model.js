@@ -1,16 +1,33 @@
-const mongoose  = require('mongoose');
+const mongoose = require('mongoose');
 
 const foodSchema = new mongoose.Schema({
-    name:{ type:String, required:true },
-    video:{ type:String,  required:true },
-    description:{ type:String },
-
-    //to know which food partner added this food item
-    foodPartnerId:{ type: mongoose.Schema.Types.ObjectId, ref:"foodpartner", required:true}
-
+    name: {
+        type: String,
+        required: true,
+    },
+    video: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+    },
+    foodPartner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "foodpartner"
+    },
+    likeCount: {
+        type: Number,
+        default: 0
+    },
+    savesCount: {
+        type: Number,
+        default: 0
+    }
 })
-        
 
-const foodModel = mongoose.model("food",foodSchema);
+
+const foodModel = mongoose.model("food", foodSchema);
+
 
 module.exports = foodModel;

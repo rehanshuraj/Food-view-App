@@ -1,23 +1,20 @@
 const ImageKit = require("imagekit");
 
 const imagekit = new ImageKit({
-    publicKey : process.env.IMAGEKIT_PUBLIC_KEY, //"your_public_api_key",
-    privateKey : process.env.IMAGEKIT_PRIVATE_KEY, //"your_private_api_key",
-    urlEndpoint : process.env.IMAGEKIT_URL_ENDPOINT //"https://ik.imagekit.io/your_imagekit_id/"
+    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
 });
 
-console.log("PUBLIC:", process.env.IMAGEKIT_PUBLIC_KEY); // 🔍 Debug
-
-async function uploadFile(file,filname){
+async function uploadFile(file, fileName) {
     const result = await imagekit.upload({
-        file : file, //required
-        fileName : filname, //required
-       
+        file: file, // required
+        fileName: fileName, // required
     })
-    return result;
+
+    return result; // Return the URL of the uploaded file
 }
 
 module.exports = {
-    uploadFile,
-    imagekit
+    uploadFile
 }
