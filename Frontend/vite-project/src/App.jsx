@@ -1,16 +1,15 @@
 import React from 'react'
 
-
-import './style.css'
-import './theme.css'
 import './App.css'
-import Approutes from './routes/Approutes'
+import './styles/theme.css'
+import AppRoutes from './routes/Approutes'
 
 function App() {
-  
+
+
   return (
     <>
-      <Approutes/>
+      <AppRoutes />
     </>
   )
 }
