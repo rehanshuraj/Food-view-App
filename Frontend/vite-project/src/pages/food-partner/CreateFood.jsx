@@ -54,10 +54,11 @@ const CreateFood = () => {
 
         formData.append('name', name);
         formData.append('description', description);
-        formData.append("mama", videoFile);
+        formData.append("video", videoFile);
 
         const response = await axios.post("http://localhost:3000/api/food", formData, {
             withCredentials: true,
+            headers: { "Content-Type": "multipart/form-data" } // 👈 add this
         })
 
         console.log(response.data);
@@ -81,6 +82,7 @@ const CreateFood = () => {
                         <label htmlFor="foodVideo">Food Video</label>
                         <input
                             id="foodVideo"
+                            name="video"           // 👈 important
                             ref={fileInputRef}
                             className="file-input-hidden"
                             type="file"
